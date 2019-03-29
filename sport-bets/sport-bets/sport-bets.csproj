@@ -7,8 +7,8 @@
     <ProjectGuid>{80DADAA9-E4A3-4E46-A48E-2F69C1A814A1}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>sport_bets</RootNamespace>
-    <AssemblyName>sport-bets</AssemblyName>
+    <RootNamespace>SportBets</RootNamespace>
+    <AssemblyName>SportBets</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>

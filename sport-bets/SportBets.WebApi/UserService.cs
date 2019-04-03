@@ -1,4 +1,9 @@
 ﻿using System;
+/* 
+ * Web api contains only classes for working with server.
+ * Represent user services - logic
+ * example -- 'Server pls get me bets'
+*/
 
 namespace SportBets.WebApi
 {
@@ -15,6 +20,5 @@ namespace SportBets.WebApi
 		//{
 		//	_webApi = webApi;
 		//}
-
     }
 }

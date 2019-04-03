@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace SportBets.Server.Core.Contracts
+namespace SportBets.Server.Core.Contracts.Networking
 {
 	public interface ISocketHandler
 	{

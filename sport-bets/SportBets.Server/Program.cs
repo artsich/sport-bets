@@ -1,4 +1,4 @@
-﻿using SportBets.Server.Core.Handlers;
+﻿using SportBets.Server.Core.NetProtocol.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace SportBets.Server
 
 		public static async Task Main(string[] args)
 		{
-			var server = new Server(new SocketHandler(), ServerPort);
+			var server = new Server(new TPSocketHandler(), ServerPort);
 			server.Run();
 			Console.WriteLine($"Server start on port: {ServerPort}");
 			var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -26,7 +26,7 @@ namespace SportBets.Server
 			await Task.Delay(1000);
 			socket.Bind(localPoint);
 			socket.Connect(remotePoint);			
-			var message = Encoding.UTF8.GetBytes("Hello-world.");
+			var message = Encoding.UTF8.GetBytes("test-server.");
 			socket.Send(message);
 
 			await Task.Delay(1000000);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportBets.Win10.View;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,12 +32,7 @@ namespace SportBets.Win10
             if (rootFrame == null)
             {
                 rootFrame = new Frame();
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                }
-
+				rootFrame.NavigationFailed += OnNavigationFailed;
                 Window.Current.Content = rootFrame;
             }
 
@@ -44,7 +40,7 @@ namespace SportBets.Win10
             {
                 if (rootFrame.Content == null)
                 {
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(ShellView), e.Arguments);
                 }
                 Window.Current.Activate();
             }

@@ -13,8 +13,7 @@ namespace SportBets.Server.Entities
 		public virtual User Person { get; set; }
 
 		public int? BetId { get; set; }
-		
-		
+
 	}
 
 	public class Bet
@@ -30,7 +29,7 @@ namespace SportBets.Server.Entities
 		public string NameBet { get; set; }
 
 		//Store args of bets name-bet:coefficient
-		public IDictionary<string, float> ;
+		public IDictionary<string, float> f;
 	}
 
     public class User

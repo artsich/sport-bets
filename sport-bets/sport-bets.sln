@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Win10", "sport-bets\SportBets.Win10.csproj", "{80DADAA9-E4A3-4E46-A48E-2F69C1A814A1}"
 EndProject
@@ -11,21 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DA3B7A70-E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox.t", "SandBox.t\SandBox.t.csproj", "{7C26673E-D70C-4D2B-92EF-5845B16BFBDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Core", "SportBets.Core\SportBets.Core.csproj", "{527011A2-E1AE-480C-934F-AFC7918419F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportBets.Core", "SportBets.Core\SportBets.Core.csproj", "{527011A2-E1AE-480C-934F-AFC7918419F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{C3A2F6FA-AC25-466D-8432-6CA8D1D79B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Server.Core", "SportBets.Server.Core\SportBets.Server.Core.csproj", "{FF245DD2-3B33-4698-862C-3F5834404C78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportBets.Server.Core", "SportBets.Server.Core\SportBets.Server.Core.csproj", "{FF245DD2-3B33-4698-862C-3F5834404C78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Server", "SportBets.Server\SportBets.Server.csproj", "{4E88DA65-19F5-4CFC-A57D-704F8E43BC60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Server.Entities", "SportBets.Server.Entities\SportBets.Server.Entities.csproj", "{F48EEC27-56BA-47FD-B55C-14481C9B03E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportBets.Server.Entities", "SportBets.Server.Entities\SportBets.Server.Entities.csproj", "{F48EEC27-56BA-47FD-B55C-14481C9B03E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Server.Database", "SportBets.Server.Database\SportBets.Server.Database.csproj", "{5B6538A7-976D-47A6-A93F-B0B0105E0BCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportBets.Server.Database", "SportBets.Server.Database\SportBets.Server.Database.csproj", "{5B6538A7-976D-47A6-A93F-B0B0105E0BCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.WebApi", "SportBets.WebApi\SportBets.WebApi.csproj", "{2036306C-1A57-42CC-A13E-650FB9895C4C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Infrastructure", "SportBets.Infrastructure\SportBets.Infrastructure.csproj", "{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportBets.WebApi", "SportBets.WebApi\SportBets.WebApi.csproj", "{2036306C-1A57-42CC-A13E-650FB9895C4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,22 +169,6 @@ Global
 		{2036306C-1A57-42CC-A13E-650FB9895C4C}.Release|x64.Build.0 = Release|Any CPU
 		{2036306C-1A57-42CC-A13E-650FB9895C4C}.Release|x86.ActiveCfg = Release|Any CPU
 		{2036306C-1A57-42CC-A13E-650FB9895C4C}.Release|x86.Build.0 = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|ARM.Build.0 = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|x64.Build.0 = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Debug|x86.Build.0 = Debug|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|ARM.ActiveCfg = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|ARM.Build.0 = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|x64.ActiveCfg = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|x64.Build.0 = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|x86.ActiveCfg = Release|Any CPU
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,7 +183,6 @@ Global
 		{F48EEC27-56BA-47FD-B55C-14481C9B03E5} = {C3A2F6FA-AC25-466D-8432-6CA8D1D79B9D}
 		{5B6538A7-976D-47A6-A93F-B0B0105E0BCA} = {C3A2F6FA-AC25-466D-8432-6CA8D1D79B9D}
 		{2036306C-1A57-42CC-A13E-650FB9895C4C} = {55606D34-4EF7-42CF-A293-8230183832F8}
-		{DAA437E2-B7E3-44CB-98C5-1C39BC23A216} = {55606D34-4EF7-42CF-A293-8230183832F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9398F5E8-7ED3-43FF-9F33-8CAC4405EE11}

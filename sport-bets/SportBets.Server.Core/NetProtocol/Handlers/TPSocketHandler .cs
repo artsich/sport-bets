@@ -1,4 +1,5 @@
 ﻿using SportBets.Server.Core.Contracts;
+using SportBets.Server.Core.Contracts.Networking;
 using SportBets.Server.Core.NetProtocol;
 using System;
 using System.Net;

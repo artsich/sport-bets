@@ -16,7 +16,7 @@ namespace SportBets.Server.Core.NetProtocol
 
 		public void Send(TPRequest req)
 		{
-			_endSocket.Send()
+//			_endSocket.Send();
 		}
     }
 }

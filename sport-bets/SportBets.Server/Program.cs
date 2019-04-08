@@ -17,49 +17,39 @@ namespace SportBets.Server
 	{
 		const int ServerPort = 5555;
 
-		class A
-		{
-			public string value { get; set; }
-		}
-
 		public static async Task Main(string[] args)
 		{
 			var server = new Server(
 				new TPSocketHandler(
-					new RequestHandler()), ServerPort);
+					new RequestHandler(), new JsonSerializer()), ServerPort);
 
 			server.Run();
 
 			Console.WriteLine($"Server start on port: {ServerPort}");
 
+			var client = new TransferProtocolClient(new JsonSerializer());
+			var remotePoint = new IPEndPoint(IPAddress.Loopback, ServerPort);
+
+			var header = new Header()
+			{
+				Address = "127.0.0.1",
+				Port = ServerPort,
+				AddressFamily = AddressFamily.InterNetwork
+			};
+
 			var request = new TPRequest()
 			{
+				Header = header,
 				Uri = "users/auth",
-				Args = new Arg[] 
+				Args = new Arg[]
 				{
 					TPRequest.BuildArg("pass", "pass11"),
 					TPRequest.BuildArg("login", "login@gmail.com")
 				}
 			};
-
-			var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-			var localPoint = new IPEndPoint(IPAddress.Loopback, 6666);
-			var remotePoint = new IPEndPoint(IPAddress.Loopback, ServerPort);
-
-			socket.Bind(localPoint);
-			socket.Connect(remotePoint);
-
-			var json = new JsonSerializer();
-			var tp = new TransferProtocol(socket, json);
-			tp.Send(request);
-			var resp = tp.Receive<TPResponse>();
-//			var data = json.Deserialize<A>(resp.JsonData);
-
+			
+			var resp = await client.Get(request);
 			Console.WriteLine(resp.JsonData);
-
-			await Task.Delay(1000);
-			//var message = Encoding.UTF8.GetBytes("test-server.");
-			//socket.Send(message);
 
 			await Task.Delay(1000000);
 		}

@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Sockets;
 
 namespace SportBets.Server.Core.Networking
 {
@@ -6,20 +7,24 @@ namespace SportBets.Server.Core.Networking
 	{
 		public string Key { get; set; }
 		public string Value { get; set; }
+
+		public override string ToString()
+		{
+			return Key + "=" + Value;
+		}
 	}
 
-	public class RequstHeader
+	public class Header
 	{
-		public IPEndPoint IPEnd { get; set; }
+		public string Address { get; set; }
+		public AddressFamily AddressFamily { get; set; }
+		public int Port { get; set; }
 	}
 
 	public class TPRequest
     {
 		//To
-		public RequstHeader RemoteAddr { get; set; }
-		
-		//From
-		public RequstHeader SenderAddr { get; set; }
+		public Header Header { get; set; }
 
 		public string Uri { get; set; }
 		public Arg[] Args { get; set; }

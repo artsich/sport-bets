@@ -5,14 +5,14 @@ using System.Text;
 
 namespace SportBets.Server.Core.Networking
 {
-	public class TransferProtocol
+	public class TransferProtocolServer
 	{
 		private readonly int BufferSize = 1_000_000;
 
 		private Socket _socket;
 		private ISerializer _serializer;
 
-		public TransferProtocol(Socket socket, ISerializer serializer)
+		public TransferProtocolServer(Socket socket, ISerializer serializer)
 		{
 			_socket = socket ?? throw new ArgumentNullException(nameof(socket));
 			_serializer = serializer ?? throw new ArgumentOutOfRangeException(nameof(serializer));

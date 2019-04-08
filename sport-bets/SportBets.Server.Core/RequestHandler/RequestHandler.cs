@@ -14,19 +14,26 @@ namespace SportBets.Server.Core.RequestHandler
 	 */
 	public class RequestHandler : IRequestHandler
 	{
-		public async Task Handle(TPRequest request, TransferProtocol protocol)
+		public async Task Handle(TPRequest request, TransferProtocolServer protocol)
 		{
 			await Task.Run(() => 
 			{
 				System.Console.WriteLine($"Request processing: {request.Uri}");
 
+				var string_data = $"Hello from: {request.Header.Address}, {request.Uri}/";
+				foreach(var arg in request.Args)
+				{
+					string_data += "?";
+					string_data += arg.ToString();
+				}
+
 				var resp = new TPResponse()
 				{
-					JsonData = $"Hello {request.SenderAddr.IPEnd.Address}:{request.SenderAddr.IPEnd.Port} ," +
-								$"From: {request.RemoteAddr.IPEnd.Address}:{request.RemoteAddr.IPEnd.Port}",
+					JsonData = string_data,
 					Status = StatusCode.OK
 				};
 
+				//TODO: send blocking method
 				protocol.Send(resp);
 			});
 		}
@@ -37,9 +44,6 @@ namespace SportBets.Server.Core.RequestHandler
 			{
 				throw new System.ArgumentNullException(nameof(args));
 			}
-
-
-
 		}
 	}
 }

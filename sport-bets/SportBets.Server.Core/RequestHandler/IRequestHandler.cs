@@ -5,6 +5,6 @@ namespace SportBets.Server.Core.RequestHandler
 {
 	public interface IRequestHandler
 	{
-		Task Handle(TPRequest request, TransferProtocol protocol);
+		Task Handle(TPRequest request, TransferProtocolServer protocol);
 	}
 }

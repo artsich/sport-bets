@@ -7,8 +7,8 @@ namespace SportBets.Server.Core.Contracts.Serializer
 
 	public interface ISerializer
 	{
- 		TOutput Serialize<TInput, TOutput>(TInput input);
-		TInput Deserialize<TInput, TOutput>(TOutput input);
+ 		string Serialize<TInput>(TInput input);
+		TOutput Deserialize<TOutput>(string data);
 	}
 
 }

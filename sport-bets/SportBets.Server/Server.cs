@@ -1,5 +1,4 @@
-﻿using SportBets.Server.Core.Contracts.Networking;
-using SportBets.Server.Core.NetProtocol.Handlers;
+﻿using SportBets.Server.Core.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +20,6 @@ namespace SportBets.Server
 		private IPEndPoint _localPoint;
 		private Thread _mainThread;
 		private ISocketHandler _clientHandler;
-		private TPSocketHandler tPSocketHandler;
-		private int serverPort;
 
 		private int Port
 		{
@@ -40,12 +37,6 @@ namespace SportBets.Server
 		{
 			_port = port;
 			_clientHandler = clientHandler;
-		}
-
-		public Server(TPSocketHandler tPSocketHandler, int serverPort)
-		{
-			this.tPSocketHandler = tPSocketHandler;
-			this.serverPort = serverPort;
 		}
 
 		public void Run()
@@ -72,6 +63,8 @@ namespace SportBets.Server
 		public void Close()
 		{
 			_running = false;
+			// or _mainThread.Abort(); ??
+
 		}
 
 		private void Init()

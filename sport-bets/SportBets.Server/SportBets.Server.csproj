@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -78,6 +82,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SportBets.Core\SportBets.Core.csproj">
+      <Project>{527011a2-e1ae-480c-934f-afc7918419f7}</Project>
+      <Name>SportBets.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SportBets.Server.Core\SportBets.Server.Core.csproj">
       <Project>{ff245dd2-3b33-4698-862c-3f5834404c78}</Project>
       <Name>SportBets.Server.Core</Name>

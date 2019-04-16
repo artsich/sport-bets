@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\RequestHandler.cs" />
+    <Compile Include="Handlers\ControllerFactory.cs" />
+    <Compile Include="Handlers\TPSocketHandler .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
@@ -89,6 +92,10 @@
     <ProjectReference Include="..\SportBets.Server.Core\SportBets.Server.Core.csproj">
       <Project>{ff245dd2-3b33-4698-862c-3f5834404c78}</Project>
       <Name>SportBets.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBets.Server.Services\SportBets.Server.Services.csproj">
+      <Project>{EA4F85DA-02F8-4FB2-90F7-8BF4C18D68BF}</Project>
+      <Name>SportBets.Server.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

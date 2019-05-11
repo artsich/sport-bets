@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using SportBets.Server.Handlers;
+using SportBets.Core.Networking;
 
 namespace SportBets.Server
 {
@@ -21,21 +22,14 @@ namespace SportBets.Server
 
 		public static async Task Main(string[] args)
 		{
-			var type = typeof(A);
-			var method = type.GetMethod("foo");
-			Console.WriteLine(method.Name);
+#if SERVISES_TEST
+	
 
-			var @params = method.GetParameters();
 
-			foreach(var par in @params)
-			{
-				Console.Write(par.ParameterType + " : " + par.Name + " ");
-			}
-			Console.WriteLine();
+#endif
 
-#if !LOCAL_TEST
-
-			var controllerFactory = new ControllerFactory(null);
+#if LOCAL_TEST
+			var controllerFactory = new ControllerFactory(new Dictionary<string,Type>());
 			var requestHandler = new RequestHandler(controllerFactory);
 			var socketHanler = new TPSocketHandler(requestHandler, new JsonSerializer());
 			var server = new Server(socketHanler, ServerPort);

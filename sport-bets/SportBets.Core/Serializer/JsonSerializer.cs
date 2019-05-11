@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SportBets.Server.Core.Contracts.Serializer;
+using SportBets.Core.Serializer;
 
 namespace SportBets.Core.Serializer
 {

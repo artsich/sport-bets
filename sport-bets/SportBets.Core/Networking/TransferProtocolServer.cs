@@ -1,7 +1,7 @@
-﻿using SportBets.Server.Core.Contracts.Serializer;
-using System;
-using System.Net.Sockets;
+﻿using System;
 using System.Text;
+using System.Net.Sockets;
+using SportBets.Core.Serializer;
 
 namespace SportBets.Server.Core.Networking
 {

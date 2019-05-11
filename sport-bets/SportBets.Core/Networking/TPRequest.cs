@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
-namespace SportBets.Server.Core.Networking
+namespace SportBets.Core.Networking
 {
 	public class Arg
 	{

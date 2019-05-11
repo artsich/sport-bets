@@ -1,9 +1,9 @@
 ﻿using SportBets.Core.Serializer;
-using SportBets.Server.Core.Contracts.Serializer;
 using SportBets.Server.Core.Networking;
 using SportBets.Server.Core.Handlers;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using SportBets.Core.Networking;
 
 namespace SportBets.Server.Core.Handlers
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SportBets.Server.Core.Contracts.Serializer
+namespace SportBets.Core.Serializer
 {
 
 	public interface ISerializer

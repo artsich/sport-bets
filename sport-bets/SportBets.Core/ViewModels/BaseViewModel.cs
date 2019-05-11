@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SportBets.Core.ViewModel
+namespace SportBets.Core.ViewModels
 {
 	public abstract class BaseViewModel : INotifyPropertyChanged
 	{

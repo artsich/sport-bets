@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using SportBets.Core.Networking;
 using SportBets.Server.Core;
 using SportBets.Server.Core.Handlers;
 using SportBets.Server.Core.Networking;
@@ -13,14 +14,15 @@ namespace SportBets.Server.Handlers
 {
 	public class ControllerFactory : IControllerFactory
 	{
+		//TODO: _need make readonly, recieve types contollers from out.
 		private IDictionary<string, Type> _nameTypeContollers;
 
 		public ControllerFactory(IDictionary<string, Type> nameTypeContollers)
 		{
-//			_nameTypeContollers = nameTypeContollers;
+			_nameTypeContollers = nameTypeContollers;
 			_nameTypeContollers.Add("login", typeof(Type));
 			_nameTypeContollers.Add("bets", typeof(Type));
-			_nameTypeContollers.Add("user", typeof(Type));
+			_nameTypeContollers.Add("users", typeof(Type));
 		}
 
 		public IController Process(string uri, Arg[] args)
@@ -37,7 +39,7 @@ namespace SportBets.Server.Handlers
 				throw new ControllerException(ControllerError.MethodNotFound);
 			}
 
-			var typeControllerInfo = GetCotrollerByName(query[0]);
+			var typeControllerInfo = GetControllerByName(query[0]);
 			IController result = null;
 
 			if (typeControllerInfo != null)
@@ -67,7 +69,7 @@ namespace SportBets.Server.Handlers
 			return result;
 		}
 
-		private Type GetCotrollerByName(string name)
+		private Type GetControllerByName(string name)
 		{
 			if (string.IsNullOrEmpty(name))
 			{

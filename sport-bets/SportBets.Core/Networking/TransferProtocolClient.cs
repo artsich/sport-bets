@@ -1,11 +1,12 @@
-﻿using SportBets.Server.Core.Contracts.Serializer;
-using System;
+﻿using System;
 using System.Net;
-using System.Net.Sockets;
 using System.Text;
+using System.Net.Sockets;
 using System.Threading.Tasks;
+using SportBets.Core.Networking;
+using SportBets.Core.Serializer;
 
-namespace SportBets.Server.Core.Networking
+namespace SportBets.Core.Networking
 {
 	public class TransferProtocolClient
 	{

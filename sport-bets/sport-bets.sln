@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Core", "Server.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Server.Database", "Sportbet.Server.Database\SportBets.Server.Database.csproj", "{585F0591-D749-4F3F-AFB0-199369BBD718}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Server.Servieces", "SportBets.Server.Servieces\SportBets.Server.Servieces.csproj", "{BA2E1DAF-B435-4D80-86FE-4A3D6DEDF000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportBets.Server.Services", "SportBets.Server.Servieces\SportBets.Server.Services.csproj", "{BA2E1DAF-B435-4D80-86FE-4A3D6DEDF000}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{DCA2E6EC-111E-4F47-A3A6-43AD64473027}"
 EndProject

@@ -1,5 +1,5 @@
 ﻿using SportBets.Core.Contracts;
-using SportBets.Services;
+using SportBets.Services.Interfaces;
 using SportBets.Win10.Bihevior;
 using System.Threading.Tasks;
 

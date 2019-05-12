@@ -15,8 +15,8 @@ namespace SportBets.Server.Database
 
 		public BetsRepository(DbContext context)
 		{
-			this._context = context;
-			this._container = context.Set<T>();
+			_context = context;
+			_container = context.Set<T>();
 		}
 
 		public virtual void Insert(T item)

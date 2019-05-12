@@ -12,6 +12,6 @@ namespace SportBets.Server.Services.Contracts
 		IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, bool lazeLoad = true);
 		Task<T> Add(T t);
 		Task<T> Edit(T t);
-		void Delete(int id);
+		Task Delete(int id);
 	}
 }

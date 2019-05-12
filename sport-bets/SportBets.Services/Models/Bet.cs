@@ -6,8 +6,8 @@ namespace SportBets.Services.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
+		public EventInfo Event { get; set; }
 		public ICollection<BetResult> Results { get; set; }
-		public Event Event { get; set; }
 
 		public Bet()
 		{

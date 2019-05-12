@@ -8,7 +8,9 @@ namespace SportBets.Services.Interfaces
 	{
 		Task<EventInfo> Create(CreatingEventInfo ev);
 		Task<EventInfo> Update(EventInfo ev);
-		Task<JustRresult> Delete(int id);
+		Task<JustResult> Delete(int id);
+		Task<EventInfo> GetById(int id);
 		Task<IEnumerable<EventInfo>> Get();
+
 	}
 }

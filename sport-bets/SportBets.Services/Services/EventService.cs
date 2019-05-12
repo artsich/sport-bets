@@ -23,7 +23,7 @@ namespace SportBets.Services.Services
 		public async Task<EventInfo> Create(CreatingEventInfo ev)
 		{
 			var args = new ArgsBuilder()
-				.Add(nameof(ev.Name), ev.Name )
+				.Add(nameof(ev.Name), ev.Name)
 				.Add(nameof(ev.DataTime), ev.DataTime.ToString())
 				.Add(nameof(ev.Teams), _serializer.Serialize(ev.Teams))
 				.Build();
@@ -51,6 +51,16 @@ namespace SportBets.Services.Services
 		public Task<EventInfo> Update(EventInfo ev)
 		{
 			throw new NotImplementedException();
+		}
+
+		public async Task<EventInfo> GetById(int id)
+		{
+			var args = new ArgsBuilder()
+				.Add(nameof(id), id.ToString())
+				.Build();
+			
+			var result = await _webApi.Query<EventInfo>(Defines.EventServices.GetEventById, args);
+			return result.Responce;
 		}
 	}
 }

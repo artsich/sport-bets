@@ -1,4 +1,4 @@
-﻿namespace SportBets.Server.Core.Networking
+﻿namespace SportBets.Core.Networking
 {
 	public enum StatusCode
 	{

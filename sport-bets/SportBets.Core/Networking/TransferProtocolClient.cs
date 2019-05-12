@@ -10,7 +10,9 @@ namespace SportBets.Core.Networking
 {
 	public class TransferProtocolClient
 	{
-		private readonly int BufferSize = 1_000_000;
+		private readonly int ReceiveBufferSize = 1_000_000;
+		private readonly int SendBufferSize = 1_000_000;
+
 		private ISerializer _serializer;
 
 		public TransferProtocolClient(ISerializer serializer)
@@ -27,31 +29,36 @@ namespace SportBets.Core.Networking
 
 			return await Task.Run( () =>
 			{
-				TPResponse response;
+				TPResponse response = null;
 				using (Socket socket = new Socket(request.Header.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
 				{
-					//socket.Bind(new IPEndPoint(IPAddress.Any, 0));
-					EndPoint remoteAddr = null;
 					try
 					{
-						remoteAddr = new IPEndPoint(IPAddress.Parse(request.Header.Address), request.Header.Port);
+						EndPoint remoteAddr = new IPEndPoint(IPAddress.Parse(request.Header.Address), request.Header.Port);
+						socket.Connect(remoteAddr);
+
+						var dataString = _serializer.Serialize(request);
+						var sendingBuffer = Encoding.UTF8.GetBytes(dataString);
+						socket.Send(sendingBuffer);
+
+						var buffer = new byte[ReceiveBufferSize];
+						socket.Receive(buffer);
+
+						var receivedData = Encoding.UTF8.GetString(buffer);
+						response = _serializer.Deserialize<TPResponse>(receivedData);
 					}
 					catch (FormatException e)
 					{
 						throw new FormatException(e.Message);
 					}
-
-					socket.Connect(remoteAddr);
-
-					var dataString = _serializer.Serialize(request);
-					var sendingBuffer = Encoding.UTF8.GetBytes(dataString);
-					socket.Send(sendingBuffer);
-
-					var buffer = new byte[BufferSize];
-					socket.Receive(buffer);
-
-					var receivedData = Encoding.UTF8.GetString(buffer);
-					response = _serializer.Deserialize<TPResponse>(receivedData);
+					catch (Exception ex)
+					{
+						response = new TPResponse()
+						{
+							JsonData = string.Empty,
+							Status = StatusCode.NotFound
+						};
+					}
 				}
 				return response;
 			});

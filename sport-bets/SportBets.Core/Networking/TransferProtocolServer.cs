@@ -7,15 +7,20 @@ namespace SportBets.Server.Core.Networking
 {
 	public class TransferProtocolServer
 	{
-		private readonly int BufferSize = 1_000_000;
+		private readonly int ReceiveBufferSize = 1_000_000;
+		private readonly int SendBufferSize = 1_000_000;
 
 		private Socket _socket;
 		private ISerializer _serializer;
 
 		public TransferProtocolServer(Socket socket, ISerializer serializer)
 		{
-			_socket = socket ?? throw new ArgumentNullException(nameof(socket));
-			_serializer = serializer ?? throw new ArgumentOutOfRangeException(nameof(serializer));
+			_socket = socket;
+
+			_socket.SendBufferSize = SendBufferSize;
+			_socket.ReceiveBufferSize = ReceiveBufferSize;
+
+			_serializer = serializer;
 		}
 
 		public void Send<T>(T data) where T : class
@@ -28,14 +33,12 @@ namespace SportBets.Server.Core.Networking
 			var dataString = _serializer.Serialize(data);
 			var sendingBuffer = Encoding.UTF8.GetBytes(dataString);
 
-			//TODO: blocking method
 			_socket.Send(sendingBuffer);
 		}
 
 		public T Receive<T>()
 		{
-			var buffer = new byte[BufferSize];
-			//TODO: blocking method
+			var buffer = new byte[ReceiveBufferSize];
 			_socket.Receive(buffer);
 			var str = Encoding.UTF8.GetString(buffer);
 			var result = _serializer.Deserialize<T>(str);

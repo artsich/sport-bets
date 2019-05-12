@@ -5,4 +5,13 @@
     xmlns:local="using:SportBets.Win10"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Resources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+
 </Application>

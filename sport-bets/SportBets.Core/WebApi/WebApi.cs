@@ -33,5 +33,11 @@ namespace SportBets.Core.WebApi
 				Responce = _serializer.Deserialize<T>(resp.JsonData)
 			};
 		}
+
+
+		public async Task<WebResult<T>> Query<T>(string uri)
+		{
+			return await Query<T>(uri, null);
+		}
 	}
 }

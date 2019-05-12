@@ -21,6 +21,8 @@ namespace SportBets.Server
 		private Thread _mainThread;
 		private ISocketHandler _clientHandler;
 
+		public Action<string> Log { get; set; }
+
 		private int Port
 		{
 			get => _port;
@@ -51,20 +53,36 @@ namespace SportBets.Server
 				while (_running)
 				{
 					var socket = _socketServer.Accept();
-					await _clientHandler.Process(socket);
+					Log?.Invoke("Receive socket");
+					try
+					{
+						await _clientHandler.Process(socket);
+					}
+					catch(Exception e)
+					{
+						Log?.Invoke(e.Message);
+						Log?.Invoke(e.StackTrace);
+					}
 				}
 
 				_socketServer?.Dispose();
 			}));
-			_mainThread.Start();
 
+			Log?.Invoke($"Server start on port: {Port}");
+				_mainThread.IsBackground = true;
+			_mainThread.Start();
+			_mainThread.Join();
 		}
 
 		public void Close()
 		{
 			_running = false;
 			// or _mainThread.Abort(); ??
+		}
 
+		public void Join()
+		{
+			_mainThread.Join();
 		}
 
 		private void Init()
@@ -72,5 +90,6 @@ namespace SportBets.Server
 			_socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			_localPoint = new IPEndPoint(IPAddress.Any, _port);
 		}
+
 	}
 }

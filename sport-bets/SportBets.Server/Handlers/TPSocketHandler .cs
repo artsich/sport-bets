@@ -20,12 +20,12 @@ namespace SportBets.Server.Core.Handlers
 
 		public async Task Process(Socket socket)
 		{
-			//TODO: dependency -> json fix.
 			await Task.Run(async () =>
 			{
 				var tp = new TransferProtocolServer(socket, _serializer);
 				var request = tp.Receive<TPRequest>();
 				await _requestHandler.Handle(request, tp);
+				socket.Shutdown(SocketShutdown.Both);
 			});
 		}
 	}

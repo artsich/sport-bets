@@ -38,30 +38,21 @@
         </RelativePanel>
         <SplitView Name="SplitPanel" Grid.Row="1" OpenPaneLength="150">
             <SplitView.Pane>
-                <ListBox SelectionMode="Single" 
+                <ListBox SelectionMode="Single"
                          SelectionChanged="ListBoxSelectionChanged" 
-                         HorizontalAlignment="Left"
-                         ItemsSource="{x:Bind ViewModel.ShellItems, Mode=OneWay}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="vm:ShellItemViewModel">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{x:Bind Image, Mode=OneTime}" FontFamily="Segoe MDL2 Assets"/>
-                                <TextBlock Text="{x:Bind PageName, Mode=OneTime}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <!--<ListBoxItem Name="Home">
+                         HorizontalAlignment="Left">
+                    <ListBoxItem Name="Home">
                         <TextBlock x:Uid="ButtonHome"
                                    Text="Home" />
                     </ListBoxItem>
                     <ListBoxItem Name="History">
                         <TextBlock x:Uid="ButtonSetting" 
                                    Text="History" />
-                    </ListBoxItem>-->
+                    </ListBoxItem>
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame Name="ContentFrame"/>
+                <Frame Name="ContentFrame" Loaded="OnFrameLoad"/>
             </SplitView.Content>
         </SplitView>
     </Grid>

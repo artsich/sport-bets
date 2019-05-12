@@ -13,6 +13,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using SportBets.Server.Handlers;
 using SportBets.Core.Networking;
+using System.Reflection;
+using SportBets.Server.Core;
+using SportBets.Server.Controllers;
 
 namespace SportBets.Server
 {
@@ -22,28 +25,22 @@ namespace SportBets.Server
 
 		public static async Task Main(string[] args)
 		{
-#if SERVISES_TEST
-	
-
-
+#if !SERVISES_TEST
+		
 #endif
-
-#if LOCAL_TEST
-			var controllerFactory = new ControllerFactory(new Dictionary<string,Type>());
-			var requestHandler = new RequestHandler(controllerFactory);
+			var requestHandler = new RequestHandler();
 			var socketHanler = new TPSocketHandler(requestHandler, new JsonSerializer());
 			var server = new Server(socketHanler, ServerPort);
+			server.Log = (x) => Console.WriteLine(x);
 			server.Run();
 
-			Console.WriteLine($"Server start on port: {ServerPort}");
-
+#if !LOCAL_TEST
 			var client = TestClient();
 			var req = TestGetRequest();
 			var resp = await client.Get(req);
-
 			Console.WriteLine($"Client recieve: {resp.JsonData}");
-			await Task.Delay(1000000);
 #endif
+			Thread.Sleep(10000000);
 		}
 
 		private static TPRequest TestGetRequest()
@@ -58,11 +55,11 @@ namespace SportBets.Server
 			var request = new TPRequest()
 			{
 				Header = header,
-				Uri = "users/auth",
+				Uri = "user/signin",
 				Args = new Arg[]
 				{
-					TPRequest.BuildArg("pass", "pass11"),
-					TPRequest.BuildArg("login", "login@gmail.com")
+					TPRequest.BuildArg("login", "q222"),
+					TPRequest.BuildArg("password", "1111")
 				}
 			};
 

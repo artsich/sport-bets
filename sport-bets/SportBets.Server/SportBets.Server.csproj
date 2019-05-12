@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SportBets.Server</RootNamespace>
     <AssemblyName>SportBets.Server</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PublishUrl>publish\</PublishUrl>
@@ -26,6 +26,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -48,10 +49,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,8 +69,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Handlers\RequestHandler.cs" />
-    <Compile Include="Handlers\ControllerFactory.cs" />
+    <Compile Include="Handlers\ControllerHandler.cs" />
     <Compile Include="Handlers\TPSocketHandler .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,17 +94,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Server.Core\Server.Core.csproj">
+      <Project>{2731888d-e82f-43f7-86d8-77732afecfe9}</Project>
+      <Name>Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sportbet.Server.Database\SportBets.Server.Database.csproj">
+      <Project>{585f0591-d749-4f3f-afb0-199369bbd718}</Project>
+      <Name>SportBets.Server.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SportBets.Core\SportBets.Core.csproj">
       <Project>{527011a2-e1ae-480c-934f-afc7918419f7}</Project>
       <Name>SportBets.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SportBets.Server.Core\SportBets.Server.Core.csproj">
-      <Project>{ff245dd2-3b33-4698-862c-3f5834404c78}</Project>
-      <Name>SportBets.Server.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SportBets.Server.Services\SportBets.Server.Services.csproj">
-      <Project>{EA4F85DA-02F8-4FB2-90F7-8BF4C18D68BF}</Project>
-      <Name>SportBets.Server.Services</Name>
+    <ProjectReference Include="..\SportBets.Server.Servieces\SportBets.Server.Servieces.csproj">
+      <Project>{ba2e1daf-b435-4d80-86fe-4a3d6dedf000}</Project>
+      <Name>SportBets.Server.Servieces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

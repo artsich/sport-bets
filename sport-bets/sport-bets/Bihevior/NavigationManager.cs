@@ -1,35 +1,43 @@
-﻿using SportBets.Core;
-using SportBets.Core.Contracts;
-using SportBets.Win10.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SportBets.Win10.View;
 using Windows.UI.Xaml.Controls;
+using Page = SportBets.Core.Contracts.Page;
 
 namespace SportBets.Win10.Bihevior
 {
-	class NavigationManager : INagvigationManager
+	public class NavigationManager
 	{
-		private Frame _contentFrame;
+		public Frame ContentFrame { get; set; }
+		public static NavigationManager Instanse { get; private set; }
 
-		public NavigationManager(Frame contentFrame)
+		static NavigationManager()
 		{
-			_contentFrame = contentFrame;
+			Instanse = new NavigationManager();
 		}
 
-		public void NovigateTo(string page)
+		public void NovigateTo(Frame frame, Page page)
 		{
-			switch(page)
-			{
-				//case Core.Page.HistoryPage.ToString():
-				//	_contentFrame.Navigate(typeof(HistoryView));
-				//	break;
-				//case Core.Page.HomePage.ToString():
-				//	_contentFrame.Navigate(typeof(HomeView));
-				//	break;
+			Frame old = ContentFrame;
+			ContentFrame = frame;
+			NavigateTo(page);
+			ContentFrame = old;
+		}
 
+		public void NavigateTo(Page page)
+		{
+			switch (page)
+			{
+				case Page.Home:
+					ContentFrame.Navigate(typeof(HomeView));
+					break;
+				case Page.History:
+					ContentFrame.Navigate(typeof(HistoryView));
+					break;
+				case Page.SignIn:
+					ContentFrame.Navigate(typeof(LoginView));
+					break;
+				case Page.SignUp:
+					ContentFrame.Navigate(typeof(HistoryView));
+					break;
 			}
 		}
 	}

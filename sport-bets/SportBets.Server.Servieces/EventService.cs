@@ -9,7 +9,6 @@ namespace SportBets.Server.Services
 {
 	public class EventService : BaseService<Event>
 	{
-
 		public EventService() : this(new BetsUnitOfWork())
 		{
 		}

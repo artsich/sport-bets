@@ -17,7 +17,7 @@ namespace SportBets.Server.Controllers
 		public async Task<object> MakeBet(int userId, int betResultId, int summa)
 		{
 			var result = await _service.MakeBet(userId, betResultId, summa);
-			return new { Result = result };				
+			return result;				
 		}
 
 		public object GetById(int id)

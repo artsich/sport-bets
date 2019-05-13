@@ -16,6 +16,16 @@ namespace SportBets.Server.Services
 		public UserService(IUnitOfWork _database) : base(_database)
 		{}
 
+		public async Task TakeOffFromScore(int userId, int amount)
+		{
+			var user = await _repository.GetById(userId);
+			if(user.Score >= amount && amount >= 0)
+			{
+				user.Score -= amount;
+				await Edit(user);
+			}
+		}
+
 		public async override Task<User> Add(User user)
 		{
 			TryValidateModel(user);

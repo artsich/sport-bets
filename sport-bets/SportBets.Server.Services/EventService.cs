@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using SportBets.Server.Database;
 using SportBets.Server.Database.Entities;
 using SportBets.Server.Database.Interfaces;
+using SportBets.Server.Services.Contracts;
 
 namespace SportBets.Server.Services
 {
-	public class EventService : BaseService<Event>
+	public class EventService : BaseService<Event>, IEventService
 	{
 		public EventService() : this(new BetsUnitOfWork())
 		{

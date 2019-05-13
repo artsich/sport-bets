@@ -11,7 +11,7 @@ namespace SportBets.Server.Database.Entities
 		public int? UserId { get; set; }
 		public User User { get; set; }
 
-		public int? BetId { get; set; }
-		public Bet Bet { get; set; }
+		public int? BetResultId { get; set; }
+		public BetResult BetResult { get; set; }
 	}
 }

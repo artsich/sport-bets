@@ -1,30 +1,33 @@
-﻿using SportBets.Server.Core;
-using SportBets.Server.Database.Entities;
-using SportBets.Server.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SportBets.Server.Core;
+using SportBets.Server.Database.Entities;
+using SportBets.Server.Services;
+using SportBets.Server.Services.Contracts;
 
 namespace SportBets.Server.Controllers
 {
 	public class BetController : IControllerMarker
 	{
+		private IBetService _service = new BetService();
+
+		public async Task<object> MakeBet(int userId, int betResultId, int summa)
+		{
+			var result = await _service.MakeBet(userId, betResultId, summa);
+			return new { Result = result };				
+		}
+
 		public object GetById(int id)
 		{
-			using (var service = new BetService())
-			{
-				return Map(service.Get(x => x.Id == id).FirstOrDefault());
-			}
+			return Map(_service.Get(x => x.Id == id).FirstOrDefault());
 		}
 
 		public IEnumerable<object> Get()
 		{
-			using (var service = new BetService())
-			{
-				return service.Get().ToList().Select(x => Map(x));
-			}
+			return _service.Get().ToList().Select(x => Map(x));
 		}
 
 		private object Map(Bet bet)
@@ -53,6 +56,11 @@ namespace SportBets.Server.Controllers
 					x.Coefficient
 				}),
 			};
+		}
+
+		public void Dispose()
+		{
+			_service.Dispose();
 		}
 	}
 }

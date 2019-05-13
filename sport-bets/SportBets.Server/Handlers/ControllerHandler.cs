@@ -46,6 +46,9 @@ namespace SportBets.Server.Handlers
 			var @params = TransformArg(args);
 
 			var result = controllerInfo.TargetMethod.Invoke(controllerInfo.TargetController, @params);
+			var disposableController = controllerInfo.TargetController as IDisposable;
+			disposableController?.Dispose();
+
 			if (result != null)
 			{
 				requestContext.Responce.Status = StatusCode.OK;
@@ -72,8 +75,7 @@ namespace SportBets.Server.Handlers
 				throw new ControllerException(ControllerError.MethodNotFound);
 			}
 
-			var typeControllerInfo = GetControllerByName(query[0]) ?? throw new ControllerException(ControllerError.ControllerNotFound);
-			IControllerMarker result = null;
+			var typeControllerInfo = GetControllerByName(query[0]) ?? throw new ControllerException(ControllerError.ControllerNotFound);			IControllerMarker result = null;
 
 			var methodInfo = GetMethodByNameAndParams(typeControllerInfo, query[1], args);
 			methodInfo = methodInfo ?? throw new ControllerException(ControllerError.ControllerNotFound);

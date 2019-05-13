@@ -1,17 +1,25 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SportBets.Server.Database;
 using SportBets.Server.Database.Entities;
 using SportBets.Server.Database.Interfaces;
 using SportBets.Server.Services.Contracts;
+using SportBets.Server.Services.Models;
 
 namespace SportBets.Server.Services
 {
 	public class BetService : BaseService<Bet>, IBetService
 	{
-		public BetService() : this(new BetsUnitOfWork())
+		private IServiveFactory _serviveFactory;
+
+		public BetService() : this(new ServiceFactory()) {}
+
+		public BetService(IServiveFactory serviceFactory) : this(new BetsUnitOfWork())
 		{
+			_serviveFactory = serviceFactory;			
 		}
 
 		public BetService(IUnitOfWork _database) : base(_database)
@@ -19,39 +27,71 @@ namespace SportBets.Server.Services
 			IncludeString = "Event";
 		}
 
-		public async Task<bool> MakeBet(int userId, int betResultId, int summa)
+		public void SpecifyResultForBet(BetResultInfo info)
 		{
-			var betsRepos = GetRepository<BetResult>();
-			var userRepos = GetRepository<User>();
-			var placedBets = GetRepository<PlacedBet>();
+			//var betResultsRepos = _repository.GetById(info.BetId);
 
-			var user = userRepos.Get(x => x.Id == userId && x.Score >= summa).FirstOrDefault();
-			if (user == null)
+			//var resultBet = betResultsRepos.GetById(betResultId);
+		}
+
+		private bool SpecifyResult(ICollection<BetResult> results, BetResultInfo info)
+		{
+			var resultsList = results.OrderBy(x => x.Id).ToList();
+			var newResults = info.Resutls.OrderBy(x => x.resultId).ToList();
+			var userService = _serviveFactory.GetUserService(_database);
+
+			if (newResults.Count != resultsList.Count)
 			{
 				return false;
 			}
 
-			var betResult = betsRepos.Get(x => x.Id == betResultId).FirstOrDefault();
+			for(int i = 0; i < results.Count; ++i)
+			{
+				resultsList[i].Result = newResults[i].result;
+
+			}
+
+			return true;
+		}
+
+		public async Task<bool> MakeBet(int userId, int betResultId, int summa)
+		{
+			var betResultsRepos = GetRepository<BetResult>();
+			var userService = _serviveFactory.GetUserService(_database);
+			var placedBets = GetRepository<PlacedBet>();
+
+			var user = userService.Get(x => x.Id == userId && x.Score >= summa).FirstOrDefault();
+			if (user == null && user.Score >= summa && summa > 0)
+			{
+				return false;
+			}
+
+			var betResult = betResultsRepos.Get(x => x.Id == betResultId).FirstOrDefault();
 			if(betResult == null)
 			{
 				return false;
 			}
 
 			int checkExistPlace = placedBets
-						.Get(x => x.BetId == betResult.BetId && 
+						.Get(x => x.BetResult.BetId == betResult.BetId && 
 							x.UserId == userId).Count();
 
-			if(checkExistPlace > 0)
+			if(checkExistPlace != 0)
 			{
 				return false;
 			}
 
+			user.Score -= summa;
+			await userService.Edit(user);
+
 			var newPlacedBet = new PlacedBet()
 			{
-				BetId = betResult.BetId,
+				BetResultId = betResult.Id,
 				DataPlaced = DateTime.Now,
 				Summa = summa,
 				UserId = user.Id,
+				User = user,
+				BetResult = betResult
 			};
 
 			placedBets.Insert(newPlacedBet);

@@ -24,5 +24,7 @@ namespace SportBets.Server.Database.Entities
 
 		public string Description { get; set; }
 		public float Coefficient { get; set; }
+
+		public bool? Result { get; set; }
 	}
 }

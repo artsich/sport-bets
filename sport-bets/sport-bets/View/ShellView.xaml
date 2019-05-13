@@ -38,7 +38,8 @@
         </RelativePanel>
         <SplitView Name="SplitPanel" Grid.Row="1" OpenPaneLength="150">
             <SplitView.Pane>
-                <ListBox SelectionMode="Single"
+                <ListBox Name="Pages"
+                         SelectionMode="Single"
                          SelectionChanged="ListBoxSelectionChanged" 
                          HorizontalAlignment="Left">
                     <ListBoxItem Name="Home">

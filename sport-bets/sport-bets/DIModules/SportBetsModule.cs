@@ -1,4 +1,5 @@
 ﻿using Ninject.Modules;
+using SportBets.Core.Contracts;
 using SportBets.Core.Networking;
 using SportBets.Core.Serializer;
 using SportBets.Core.WebApi;
@@ -15,6 +16,7 @@ namespace SportBets.Win10.DIModules
 		public override void Load()
 		{
 			Bind<ISerializer>().To<JsonSerializer>();
+
 			Bind<IWebApi>().To<WebApi>()
 				.WithConstructorArgument(new Header()
 				{
@@ -23,11 +25,14 @@ namespace SportBets.Win10.DIModules
 					Port = Defines.ServerPort
 				});
 
+			Bind<INagvigationManager>().ToConstant(NavigationManager.Instanse);
+
 			Bind<IBetService>().To<BetService>();
 			Bind<IUserService>().To<UserService>();
 			Bind<IEventService>().To<EventService>();
 
 			Bind<SignInViewModel>().ToSelf();
+			Bind<HomeViewModel>().ToSelf();
 
 			Bind<AuthUserManager>()
 				.ToSelf()

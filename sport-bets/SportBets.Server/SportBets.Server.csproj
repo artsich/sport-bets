@@ -69,8 +69,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BetController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Handlers\ILog.cs" />
     <Compile Include="Handlers\RequestHandler.cs" />
     <Compile Include="Handlers\ControllerHandler.cs" />
     <Compile Include="Handlers\TPSocketHandler .cs" />
@@ -107,7 +109,7 @@
       <Project>{527011a2-e1ae-480c-934f-afc7918419f7}</Project>
       <Name>SportBets.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SportBets.Server.Servieces\SportBets.Server.Services.csproj">
+    <ProjectReference Include="..\SportBets.Server.Services\SportBets.Server.Services.csproj">
       <Project>{ba2e1daf-b435-4d80-86fe-4a3d6dedf000}</Project>
       <Name>SportBets.Server.Services</Name>
     </ProjectReference>

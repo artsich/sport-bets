@@ -7,69 +7,56 @@ using SportBets.Server.Services;
 using SportBets.Core.Serializer;
 using SportBets.Server.Core;
 using SportBets.Server.Database.Entities;
+using SportBets.Server.Services.Contracts;
 
 namespace SportBets.Server.Controllers
 {
 	public class EventController : IControllerMarker
 	{
-		public readonly ISerializer _serializer = new JsonSerializer();
+		private readonly ISerializer _serializer = new JsonSerializer();
+		private IEventService _service = new EventService();
 
 		public async Task<object> Create(string name, string strDateTime, string jsonTeams)
 		{
-			using (var service = new EventService())
-			{
-				var teams = _serializer.Deserialize<ICollection<Team>>(jsonTeams);
-				DateTime.TryParse(strDateTime, out DateTime dateTime);
+			var teams = _serializer.Deserialize<ICollection<Team>>(jsonTeams);
+			DateTime.TryParse(strDateTime, out DateTime dateTime);
 
-				var newEvent = new Event()
-				{
-					DataTime = dateTime,
-					Name = name,
-					Teams = teams
-				};
+			var newEvent = new Event()
+			{
+				DataTime = dateTime,
+				Name = name,
+				Teams = teams
+			};
 				
-				return Map(await service.Add(newEvent));
-			}
+			return Map(await _service.Add(newEvent));
 		}
 
 		public async Task<object> Delete(int id)
 		{
-			using (var service = new EventService())
+			try
 			{
-				try
-				{
-					await service.Delete(id);
-				}
-				catch(Exception ex)
-				{
-					return new { Result = false };
-				}
-				return new { Result = true };
+				await _service.Delete(id);
 			}
+			catch(Exception ex)
+			{
+				return new { Result = false };
+			}
+			return new { Result = true };
 		}
 
 		public async Task<object> Update(Event targetEvent)
 		{
-			using (var service = new EventService())
-			{
-				return Map(await service.Edit(targetEvent));
-			}
+			return Map(await _service.Edit(targetEvent));
 		}
 
 		public object GetById(int id)
 		{
-			using (var service = new EventService())
-			{
-				return Map(service.Get(x => x.Id == id).FirstOrDefault());
-			}
+			return Map(_service.Get(x => x.Id == id, false).FirstOrDefault());
 		}
 
-		public object Get()
+		public IEnumerable<object> Get()
 		{
-			using (var service = new EventService())
-			{
-				return service.Get().Select(x => Map(x));
-			}
+			return _service.Get(null, false).ToList().Select(x => Map(x));
 		}
 
 		private object Map(Event ev)
@@ -86,6 +73,11 @@ namespace SportBets.Server.Controllers
 				ev.DataTime,
 				ev.Teams
 			};
+		}
+
+		public void Dispose()
+		{
+			_service.Dispose();
 		}
 	}
 }

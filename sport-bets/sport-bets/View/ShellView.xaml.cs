@@ -19,6 +19,15 @@ namespace SportBets.Win10.View
 
 		private void ListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			var selected = (ListBoxItem)Pages.SelectedItem;
+			if (Core.Contracts.Page.Home.ToString().Equals(selected.Name))
+			{
+				_navigationManager.NavigateTo(Core.Contracts.Page.Home);
+			}
+			else if (Core.Contracts.Page.History.ToString().Equals(selected.Name))
+			{
+				_navigationManager.NavigateTo(Core.Contracts.Page.History);
+			}
 		}
 
 		private void HamburgerButtonClick(object sender, RoutedEventArgs e)

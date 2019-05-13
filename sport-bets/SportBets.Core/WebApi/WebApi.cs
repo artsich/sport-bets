@@ -26,6 +26,15 @@ namespace SportBets.Core.WebApi
 			};
 
 			var resp = await tpc.Get(request);
+			
+			if(resp.JsonData == null)
+			{
+				return new WebResult<T>()
+				{
+					Status = StatusCode.NotFound,
+					Responce = default
+				};
+			}
 
 			return new WebResult<T>()
 			{

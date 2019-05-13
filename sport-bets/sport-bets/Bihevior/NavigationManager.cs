@@ -1,10 +1,11 @@
-﻿using SportBets.Win10.View;
+﻿using SportBets.Core.Contracts;
+using SportBets.Win10.View;
 using Windows.UI.Xaml.Controls;
 using Page = SportBets.Core.Contracts.Page;
 
 namespace SportBets.Win10.Bihevior
 {
-	public class NavigationManager
+	public class NavigationManager : INagvigationManager
 	{
 		public Frame ContentFrame { get; set; }
 		public static NavigationManager Instanse { get; private set; }
@@ -34,9 +35,6 @@ namespace SportBets.Win10.Bihevior
 					break;
 				case Page.SignIn:
 					ContentFrame.Navigate(typeof(LoginView));
-					break;
-				case Page.SignUp:
-					ContentFrame.Navigate(typeof(HistoryView));
 					break;
 			}
 		}

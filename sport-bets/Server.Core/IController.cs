@@ -1,6 +1,8 @@
-﻿namespace SportBets.Server.Core
+﻿using System;
+
+namespace SportBets.Server.Core
 {
-	public interface IControllerMarker
+	public interface IControllerMarker : IDisposable
 	{ }
 
 	public interface IControllerHandler

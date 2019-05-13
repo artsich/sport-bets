@@ -1,4 +1,5 @@
 ﻿using SportBets.Server.Core.Handlers;
+using SportBets.Server.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SportBets.Server
 {
-	class Server
+	class Server : ILog
 	{
 		private const int Backlog = 512;
 
@@ -53,7 +54,6 @@ namespace SportBets.Server
 				while (_running)
 				{
 					var socket = _socketServer.Accept();
-					Log?.Invoke("Receive socket");
 					try
 					{
 						await _clientHandler.Process(socket);

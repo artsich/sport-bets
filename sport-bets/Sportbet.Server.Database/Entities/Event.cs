@@ -8,6 +8,9 @@ namespace SportBets.Server.Database.Entities
 		public string Name { get; set; }
 		public DateTime DataTime { get; set; }
 
+		public int? TypeSportId { get; set; }
+		public TypeSport TypeSport { get; set; }
+
 		public virtual ICollection<Team> Teams { get; set; }
 
 		public Event()

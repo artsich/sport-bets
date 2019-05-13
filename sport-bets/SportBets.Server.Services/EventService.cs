@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SportBets.Server.Database;
 using SportBets.Server.Database.Entities;
@@ -15,6 +17,7 @@ namespace SportBets.Server.Services
 
 		public EventService(IUnitOfWork _database) : base(_database)
 		{
+			IncludeString = "TypeSport";
 		}
 
 		public async override Task<Event> Add(Event sportEvent)

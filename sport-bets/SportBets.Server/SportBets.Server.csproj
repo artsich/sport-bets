@@ -72,6 +72,7 @@
     <Compile Include="Controllers\BetController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Handlers\ILog.cs" />
     <Compile Include="Handlers\RequestHandler.cs" />
     <Compile Include="Handlers\ControllerHandler.cs" />
     <Compile Include="Handlers\TPSocketHandler .cs" />

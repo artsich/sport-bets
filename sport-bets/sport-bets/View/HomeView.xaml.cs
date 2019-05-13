@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SportBets.Services.Models;
+using SportBets.Win10.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,9 +19,21 @@ namespace SportBets.Win10.View
 {
 	public sealed partial class HomeView : Page
 	{
+		private HomeViewModel ViewModel { get; }
 		public HomeView()
 		{
 			this.InitializeComponent();
+			ViewModel = DataContext as HomeViewModel;
+		}
+
+		private void OnEventClick(object sender, SelectionChangedEventArgs e)
+		{
+			ViewModel.ShowDialogMoreEventInfo(Events.SelectedItem as EventInfo);
+		}
+
+		private async void OnLoadedGrid(object sender, RoutedEventArgs e)
+		{
+			await ViewModel.Load();
 		}
 	}
 }

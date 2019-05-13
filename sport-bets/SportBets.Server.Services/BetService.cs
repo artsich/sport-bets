@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using SportBets.Server.Database;
 using SportBets.Server.Database.Entities;
 using SportBets.Server.Database.Interfaces;
+using SportBets.Server.Services.Contracts;
 
 namespace SportBets.Server.Services
 {
-	public class BetService : BaseService<Bet>
+	public class BetService : BaseService<Bet>, IBetService
 	{
 		public BetService() : this(new BetsUnitOfWork())
 		{
@@ -17,6 +16,48 @@ namespace SportBets.Server.Services
 
 		public BetService(IUnitOfWork _database) : base(_database)
 		{
+			IncludeString = "Event";
+		}
+
+		public async Task<bool> MakeBet(int userId, int betResultId, int summa)
+		{
+			var betsRepos = GetRepository<BetResult>();
+			var userRepos = GetRepository<User>();
+			var placedBets = GetRepository<PlacedBet>();
+
+			var user = userRepos.Get(x => x.Id == userId && x.Score >= summa).FirstOrDefault();
+			if (user == null)
+			{
+				return false;
+			}
+
+			var betResult = betsRepos.Get(x => x.Id == betResultId).FirstOrDefault();
+			if(betResult == null)
+			{
+				return false;
+			}
+
+			int checkExistPlace = placedBets
+						.Get(x => x.BetId == betResult.BetId && 
+							x.UserId == userId).Count();
+
+			if(checkExistPlace > 0)
+			{
+				return false;
+			}
+
+			var newPlacedBet = new PlacedBet()
+			{
+				BetId = betResult.BetId,
+				DataPlaced = DateTime.Now,
+				Summa = summa,
+				UserId = user.Id,
+			};
+
+			placedBets.Insert(newPlacedBet);
+			await _database.Save();
+
+			return true;
 		}
 
 		public override async Task<Bet> Add(Bet model)

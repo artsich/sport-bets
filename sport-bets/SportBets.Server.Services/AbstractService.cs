@@ -13,6 +13,7 @@ namespace SportBets.Server.Services
 	{
 		protected readonly IUnitOfWork _database;
 		protected IGenericRepository<T> _repository;
+		protected string IncludeString = "";
 
 		private bool _disposed;
 
@@ -43,14 +44,19 @@ namespace SportBets.Server.Services
 			return model;
 		}
 
-		public virtual IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, bool lazeLoad = true)
+		public virtual IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, bool lazyLoad = false)
 		{
-			if (lazeLoad)
+			if (!lazyLoad)
 			{
-				return _repository.Get(filter, "");
+				return _repository.Get(filter, IncludeString);
 			}
 			return _repository.Get(filter);
 
+		}
+
+		protected IGenericRepository<Entity> GetRepository<Entity>() where Entity : BaseEntity
+		{
+			return _database.GetRepository<Entity>();
 		}
 
 		protected virtual void Dispose(bool dispose)

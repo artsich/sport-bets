@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AbstractService.cs" />
     <Compile Include="BetService.cs" />
+    <Compile Include="Contracts\IBetService.cs" />
     <Compile Include="Contracts\ISerivceBase.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="EventService.cs" />

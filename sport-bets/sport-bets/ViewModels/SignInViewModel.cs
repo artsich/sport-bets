@@ -10,6 +10,7 @@ namespace SportBets.Win10.ViewModels
 		private string USER_NOT_FOUNT = "User not found";
 
 		private IUserService _userService;
+		private INagvigationManager _navigationManager;
 		private AuthUserManager _userAuthManager;
 
 		private string _login;
@@ -46,10 +47,13 @@ namespace SportBets.Win10.ViewModels
 			}
 		}
 
-		public SignInViewModel(AuthUserManager userAuthManager, IUserService userService)
+		public SignInViewModel(IUserService userService,
+			INagvigationManager navigationManager,
+			AuthUserManager userAuthManager)
 		{
 			_userService = userService;
 			_userAuthManager = userAuthManager;
+			_navigationManager = navigationManager;
 		}
 
 		public async Task SignIn()
@@ -67,7 +71,7 @@ namespace SportBets.Win10.ViewModels
 				_userAuthManager.User = user;
 				Login = Password = string.Empty;
 
-				NavigationManager.Instanse.NavigateTo(Page.Home);
+				_navigationManager.NavigateTo(Page.Home);
 			}
 		}
 

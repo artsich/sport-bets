@@ -32,8 +32,10 @@ namespace SportBets.Server
 			var socketHanler = new TPSocketHandler(requestHandler, new JsonSerializer());
 			var server = new Server(socketHanler, ServerPort);
 			server.Log = (x) => Console.WriteLine(x);
-			server.Run();
+			socketHanler.Log = server.Log;
+			requestHandler.Log = server.Log;
 
+			server.Run();
 #if !LOCAL_TEST
 			var client = TestClient();
 			var req = TestGetRequest();
@@ -70,6 +72,5 @@ namespace SportBets.Server
 		{
 			return new TransferProtocolClient(new JsonSerializer());
 		}
-		
 	}
 }

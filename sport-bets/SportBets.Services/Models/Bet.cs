@@ -18,7 +18,6 @@ namespace SportBets.Services.Models
 	public class BetResult 
 	{
 		public int Id { get; set; }
-		public Bet Bet { get; set; }
 
 		public string Description { get; set; }
 		public float Coefficient { get; set; }

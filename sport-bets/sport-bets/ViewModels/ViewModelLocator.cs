@@ -1,10 +1,5 @@
 ﻿using Ninject;
 using SportBets.Win10.DIModules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportBets.Win10.ViewModels
 {
@@ -15,6 +10,11 @@ namespace SportBets.Win10.ViewModels
 		public SignInViewModel SignInViewModel
 		{
 			get => _kernel.Get<SignInViewModel>();
+		}
+
+		public HomeViewModel HomeViewModel
+		{
+			get => _kernel.Get<HomeViewModel>();
 		}
 	}
 }

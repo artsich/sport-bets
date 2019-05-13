@@ -60,15 +60,15 @@ namespace SportBets.Server.Controllers
 		{
 			using (var service = new EventService())
 			{
-				return Map(service.Get(x => x.Id == id).FirstOrDefault());
+				return Map(service.Get(x => x.Id == id, false).FirstOrDefault());
 			}
 		}
 
-		public object Get()
+		public IEnumerable<object> Get()
 		{
 			using (var service = new EventService())
 			{
-				return service.Get().Select(x => Map(x));
+				return service.Get(null, false).ToList().Select(x => Map(x));
 			}
 		}
 

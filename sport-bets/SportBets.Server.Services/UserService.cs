@@ -21,7 +21,7 @@ namespace SportBets.Server.Services
 			TryValidateModel(user);
 
 			int existUsers = _repository
-				.Get((x) => x.Login == user.Login)
+				.Get((x) => x.Login.Equals(user.Login))
 				.Count();
 
 			if (existUsers == 0)

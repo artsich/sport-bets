@@ -39,8 +39,11 @@ namespace SportBets.Server.Handlers
 
 		public void Execute(RequestContext requestContext)
 		{
-			var controllerInfo = Find(requestContext.Request.Uri, requestContext.Request.Args);
-			var @params = TransformArg(requestContext.Request.Args);
+			var args = requestContext.Request.Args ?? new Arg[0];
+			var uri = requestContext.Request.Uri;
+
+			var controllerInfo = Find(uri, args);
+			var @params = TransformArg(args);
 
 			var result = controllerInfo.TargetMethod.Invoke(controllerInfo.TargetController, @params);
 			if (result != null)

@@ -3,15 +3,46 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SportBets.Win10.View"
+    xmlns:model="using:SportBets.Services.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding HomeViewModel, Source={StaticResource ViewModelLocator}}">
 
-    <Grid>
-        <TextBlock Text="{}" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="NameEventStyle">
+            <Setter Property="Margin" Value="8,8,8,8"/>
+        </Style>
+        <Style TargetType="Grid" x:Key="EventContainerStyle">
+            <Setter Property="Margin" Value="100, 40, 100, 20"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="EventsGrid"
+          Style="{StaticResource EventContainerStyle}"
+          Loaded="OnLoadedGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox Name="Events" 
+                    SelectionChanged="OnEventClick"
+                    ItemsSource="{x:Bind ViewModel.Events, Mode=OneWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="model:EventInfo">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource NameEventStyle}"
+                                    Text="{x:Bind Name}"/>
+                        <TextBlock Text="{x:Bind DateTime.Date}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel >
+            
+        </StackPanel>
+        
     </Grid>
 </Page>

@@ -14,6 +14,6 @@ namespace SportBets.Core.Contracts
 
 	public interface INagvigationManager
 	{
-		void NovigateTo(Page page);
+		void NavigateTo(Page page);
 	}
 }

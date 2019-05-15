@@ -27,6 +27,11 @@ namespace SportBets.Services.Models
 		}
 	}
 
+	public class MakeBetResult
+	{
+		public bool Result { get; set; }
+	}
+
 	public class BetResult 
 	{
 		public int Id { get; set; }

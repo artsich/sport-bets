@@ -2,6 +2,7 @@
 using SportBets.Services.Models;
 using SportBets.Win10.Bihevior;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SportBets.Win10.ViewModels
@@ -9,44 +10,66 @@ namespace SportBets.Win10.ViewModels
 	public class HomeViewModel : BaseViewModel
 	{
 		private IEventService _eventService;
-		private AuthUserManager _authManager;
-		private IEnumerable<EventInfo> _events;
+		private IBetService _betService;
+		private ICollection<EventInfo> _events;
+
+		private AuthUserManager _authUserManager;
 		private string _errorMessage;
 
-		public string ErrorMessage
-		{
-			get => _errorMessage;
-			set
-			{
-				_errorMessage = value;
-				OnPropertyNotified(nameof(ErrorMessage));
-			}
-		}
-
-		public IEnumerable<EventInfo> Events
+		public ICollection<EventInfo> Events
 		{
 			get => _events;
-			set
+			private set
 			{
 				_events = value;
 				OnPropertyNotified(nameof(Events));
 			}
 		}
 
-		public HomeViewModel(IEventService eventService, AuthUserManager authManager)
+		public string ErrorMessage
+		{
+			get => _errorMessage;
+			private set
+			{
+				_errorMessage = value;
+				OnPropertyNotified(nameof(ErrorMessage));
+			}
+		}
+
+		public HomeViewModel(IEventService eventService, IBetService betService, AuthUserManager authManager)
 		{
 			_eventService = eventService;
-			_authManager = authManager;
+			_betService = betService;
+			_authUserManager = authManager;
+		}
+
+		public async Task MakeBet(int resultId, int summa)
+		{
+			if (summa <= 0 || resultId < 0)
+			{
+				return;
+			}
+
+			if (_authUserManager.IsAuthorize)
+			{
+				var result = await _betService.MakeBet(_authUserManager.User.Id, resultId, summa);
+				if (!result.Result)
+				{
+					ErrorMessage = "Oops something went wrong";
+				}
+			}
 		}
 
 		public async Task Load()
 		{
-			Events = await _eventService.Get();
+			var result = await _eventService.Get();//await _betService.Get();
+			Events = result.ToList();
+
+			if (Events == null)
+			{
+				ErrorMessage = "Can't load Bets";
+			}
 		}
 
-		public void ShowDialogMoreEventInfo(EventInfo eventInfo)
-		{
-			//TODO: Some code...
-		}
 	}
 }

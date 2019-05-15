@@ -15,6 +15,7 @@ namespace SportBets.Server.Controllers
 	{
 		private readonly ISerializer _serializer = new JsonSerializer();
 		private IEventService _service = new EventService();
+		private IBetService _betService = new BetService();
 
 		public async Task<object> Create(string name, string strDateTime, string jsonTeams)
 		{
@@ -56,7 +57,7 @@ namespace SportBets.Server.Controllers
 
 		public IEnumerable<object> Get()
 		{
-			return _service.Get(null, false).ToList().Select(x => Map(x));
+			return _service.Get().ToList().Select(x => Map(x));
 		}
 
 		private object Map(Event ev)
@@ -65,19 +66,25 @@ namespace SportBets.Server.Controllers
 			{
 				return ev;
 			}
+			var betsForEvent = _betService.Get(x => x.EventId == ev.Id, false)
+				.ToList()
+				.Select(x => new { x.Id, x.Name,
+					Results = x.Results.Select(y => new { y.Id, y.Description, y.Coefficient}), x.EventId });
 
 			return new
 			{
 				ev.Id,
 				ev.Name,
 				ev.DataTime,
-				ev.Teams
+				ev.Teams,
+				Bets = betsForEvent
 			};
 		}
 
 		public void Dispose()
 		{
 			_service.Dispose();
+			_betService.Dispose();
 		}
 	}
 }

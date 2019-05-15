@@ -11,6 +11,6 @@ namespace SportBets.Services.Interfaces
 		Task Delete(int id);
 		Task<IEnumerable<Bet>> Get();
 		Task<Bet> GetById(int id);
-		Task<bool> MakeBet(int userId, int betResultId, int summa);
+		Task<MakeBetResult> MakeBet(int userId, int betResultId, int summa);
 	}
 }

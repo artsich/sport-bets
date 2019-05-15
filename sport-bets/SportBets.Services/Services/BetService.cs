@@ -48,7 +48,7 @@ namespace SportBets.Services.Services
 			return result.Responce;
 		}
 
-		public async Task<bool> MakeBet(int userId, int betResultId, int summa)
+		public async Task<MakeBetResult> MakeBet(int userId, int betResultId, int summa)
 		{
 			var args = new ArgsBuilder()
 				.Add(nameof(userId), userId.ToString())
@@ -56,7 +56,7 @@ namespace SportBets.Services.Services
 				.Add(nameof(summa), summa.ToString())
 				.Build();
 
-			var result = await _webApi.Query<bool>(Defines.BetService.MakeBet, args);
+			var result = await _webApi.Query<MakeBetResult>(Defines.BetService.MakeBet, args);
 			return result.Responce;
 		}
 	}

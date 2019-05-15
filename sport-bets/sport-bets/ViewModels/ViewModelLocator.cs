@@ -16,5 +16,10 @@ namespace SportBets.Win10.ViewModels
 		{
 			get => _kernel.Get<HomeViewModel>();
 		}
+
+		public SelectBetsViewModel SelectBetsViewModel
+		{
+			get => _kernel.Get<SelectBetsViewModel>();
+		}
 	}
 }

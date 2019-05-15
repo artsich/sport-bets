@@ -23,5 +23,13 @@
 			public static string GetEventById	= $"{EventController}/getbyid";
 			public static string GetEvents		= $"{EventController}/get";
 		}
+
+		public static class BetService
+		{
+			private static string BetController = "bet";
+			public static string GetBets = $"{BetController}/get";
+			public static string GetBetById = $"{BetController}/getbyid";
+			public static string MakeBet = $"{BetController}/makebet";
+		}
 	}
 }

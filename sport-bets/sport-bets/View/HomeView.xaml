@@ -6,6 +6,7 @@
     xmlns:model="using:SportBets.Services.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:custom="using:SportBets.Win10.CustomControls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding HomeViewModel, Source={StaticResource ViewModelLocator}}">
@@ -17,32 +18,27 @@
         <Style TargetType="Grid" x:Key="EventContainerStyle">
             <Setter Property="Margin" Value="100, 40, 100, 20"/>
         </Style>
+        <ItemsPanelTemplate x:Name="ItemsStackPanelTemplate">
+            <ItemsStackPanel Orientation="Vertical"/>
+        </ItemsPanelTemplate>
     </Page.Resources>
 
     <Grid x:Name="EventsGrid"
           Style="{StaticResource EventContainerStyle}"
           Loaded="OnLoadedGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <ListBox Name="Events" 
-                    SelectionChanged="OnEventClick"
-                    ItemsSource="{x:Bind ViewModel.Events, Mode=OneWay}">
-            <ListBox.ItemTemplate>
-                <DataTemplate x:DataType="model:EventInfo">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource NameEventStyle}"
-                                    Text="{x:Bind Name}"/>
-                        <TextBlock Text="{x:Bind DateTime.Date}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <StackPanel>
+            <TextBlock Text="{x:Bind ViewModel.ErrorMessage}" Foreground="Red" FontSize="16"/>
 
-        <StackPanel >
-            
+            <ListView HorizontalAlignment="Center"
+                  ItemsSource="{x:Bind ViewModel.Events, Mode=OneWay}"
+                  ItemsPanel="{StaticResource ItemsStackPanelTemplate}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:EventInfo">
+                        <custom:SelectBetView Bets="{Binding Bets}"
+                                          NameEvent="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
-        
     </Grid>
 </Page>

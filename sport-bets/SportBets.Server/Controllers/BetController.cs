@@ -14,9 +14,13 @@ namespace SportBets.Server.Controllers
 	{
 		private IBetService _service = new BetService();
 
-		public async Task<object> MakeBet(int userId, int betResultId, int summa)
+		public async Task<object> MakeBet(string userId, string betResultId, string summa)
 		{
-			var result = await _service.MakeBet(userId, betResultId, summa);
+			int.TryParse(userId, out var uid);
+			int.TryParse(betResultId, out var brid);
+			int.TryParse(summa, out var sum);
+
+			var result = await _service.MakeBet(uid, brid, sum);
 			return new { Result = result };				
 		}
 

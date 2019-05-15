@@ -1,12 +1,16 @@
 ﻿using SportBets.Services.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SportBets.Services.Interfaces
 {
 	public interface IBetService
 	{
-		Task Create(Bet bet);
+		Task Create(CreatedInfoBet bet);
 		Task Update(Bet bet);
 		Task Delete(int id);
+		Task<IEnumerable<Bet>> Get();
+		Task<Bet> GetById(int id);
+		Task<MakeBetResult> MakeBet(int userId, int betResultId, int summa);
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using SportBets.Services.Models;
+using SportBets.Win10.CustomControls;
 using SportBets.Win10.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace SportBets.Win10.View
 	public sealed partial class HomeView : Page
 	{
 		private HomeViewModel ViewModel { get; }
+
 		public HomeView()
 		{
 			this.InitializeComponent();
@@ -28,12 +30,15 @@ namespace SportBets.Win10.View
 
 		private void OnEventClick(object sender, SelectionChangedEventArgs e)
 		{
-			ViewModel.ShowDialogMoreEventInfo(Events.SelectedItem as EventInfo);
 		}
 
 		private async void OnLoadedGrid(object sender, RoutedEventArgs e)
 		{
 			await ViewModel.Load();
+		}
+
+		private void OnButtonClick(object sender, RoutedEventArgs e)
+		{
 		}
 	}
 }

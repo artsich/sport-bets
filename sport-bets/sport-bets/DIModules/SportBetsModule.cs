@@ -31,8 +31,9 @@ namespace SportBets.Win10.DIModules
 			Bind<IUserService>().To<UserService>();
 			Bind<IEventService>().To<EventService>();
 
-			Bind<SignInViewModel>().ToSelf();
 			Bind<HomeViewModel>().ToSelf();
+			Bind<SignInViewModel>().ToSelf();
+			Bind<SelectBetsViewModel>().ToSelf();
 
 			Bind<AuthUserManager>()
 				.ToSelf()

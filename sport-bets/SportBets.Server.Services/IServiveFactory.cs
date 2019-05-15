@@ -6,7 +6,7 @@ namespace SportBets.Server.Services
 	public interface IServiveFactory
 	{
 		IUserService GetUserService(IUnitOfWork unitOfWork);
-		IBetService  GetBetService(IUnitOfWork unitOfWork);
+		IBetService GetBetService(IUnitOfWork unitOfWork);
 		IEventService GetEventService(IUnitOfWork unitOfWork);
 	}
 }

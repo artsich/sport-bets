@@ -28,9 +28,12 @@ namespace SportBets.Server.Core.Handlers
 		{
 			string args = "";
 
-			for (int i = 0; i < req.Args.Length; ++i)
+			if(req.Args != null)
 			{
-				args += req.Args[i] + " : ";
+				for (int i = 0; i < req.Args.Length; ++i)
+				{
+					args += req.Args[i] + " : ";
+				}
 			}
 
 			Log?.Invoke($"\turi: {req.Uri}, \n\t args: {args}");

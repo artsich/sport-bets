@@ -1,0 +1,48 @@
+﻿<ContentDialog
+    x:Class="SportBets.Win10.CustomControls.SelectBetResultDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SportBets.Win10.CustomControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Select be"
+    PrimaryButtonText="Make bet"
+    SecondaryButtonText="Close"
+    PrimaryButtonClick="OnPrimaryButtonClick"
+    SecondaryButtonClick="OnSecondaryButtonClick">
+
+    <ContentDialog.Resources>
+        <ItemsPanelTemplate x:Name="ItemsStackPanelTemplate">
+            <ItemsStackPanel Orientation="Vertical"/>
+        </ItemsPanelTemplate>
+        
+    </ContentDialog.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="BetResultsList"
+                  Grid.Row="0"
+                  ItemsSource="{x:Bind BetResults, Mode=OneWay}"
+                  ItemsPanel="{StaticResource ItemsStackPanelTemplate}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Description}"/>
+                        <TextBlock Text=" x"/>
+                        <TextBlock Text="{Binding Coefficient}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBox x:Name="Summa"
+                 Grid.Row="1"
+                 PlaceholderText="Summa"
+                 Margin="0,8,0,0"
+                 Visibility="{Binding ElementName=BetResultsList, Path=SelectedItem, Converter={StaticResource NullValueConverter}}" />
+    </Grid>
+</ContentDialog>
